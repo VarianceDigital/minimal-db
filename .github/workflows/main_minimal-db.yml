@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'minimal-db'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_E94E977E9CC24F8D88007120AE5E7DEA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8CB460B36C524FADAEE16E7C9231E8E9 }}
