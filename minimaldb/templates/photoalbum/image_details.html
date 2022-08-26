@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block metatags %}
+<title>Uploader | Minimal</title>
+<meta name="description" content="Explain minimal.">
+{% endblock %}
+
+{% block contents %}
+<div class="container">
+  <div>
+    <ol class="breadcrumb small">
+        <li class="breadcrumb-item"><a href="{{url_for('bl_home.index')}}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{url_for('bl_photoalbum.list')}}">List of images</a></li>
+        <li class="breadcrumb-item" aria-current="page">Details</li>
+    </ol>
+  </div>
+  
+  <h2>Image details</h2>
+
+  <div class="row mb-4">
+    <div class="col-md-7" style="position:relative">
+      <img id="full-image" src="{{url_for('static', filename='images/cats/'+image['img_filename'])}}" class="card-img-top" alt="{{image['img_caption']}}" style="position:relative">
+      <canvas id="canvas" style="position:absolute; left: 0px; top:0px"></canvas>
+    </div>
+    <div class="col-md-5">
+      <div class="mb-3">
+        <label for="img_name" class="form-label">Image name</label>
+        <input type="text" class="form-control" id="img_name" name="img_name" placeholder="Miao" value="{{image['img_name']}}" disabled>
+      </div>
+      <div class="mb-3">
+        <label for="img_caption" class="form-label">Image description</label>
+        <input type="text" class="form-control" id="img_caption" name="img_caption" placeholder="Cute nose" value="{{image['img_caption']}}" disabled>
+      </div>
+      <h5 class="mt-5">Thumbnail</h5>
+      <div class="row">
+        <div class="col"><img src="{{url_for('static', filename='images/cats_thmbs/'+image['img_filename'])}}" class="card-img-top" alt="{{image['img_caption']}}"></div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
