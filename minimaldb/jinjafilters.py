@@ -20,14 +20,6 @@ def displayError(errNum):
 msgDict = { 
     "Msg1": "<p>This is a <b>nice</b> message, the first of the list</p>",
     "Msg2": "<p>This is an even <b>nicer</b> message.</p>",
-    "Msg3": "<p>Access key is invalid!</p>",
-    "Msg4": "<p>Access key accepted.</br>Demo mode off!</p>",
-    "Msg5": "<p>Demo mode back on!</p>",
-    "Msg6": "<p>Please turn demo mode OFF to delete a picture</p>",
-    "Msg7": "<p>Please turn demo mode OFF to upload a picture</p>",
-    "Msg8": "<p>No image id sent to server</p>",
-    "Msg9": "<p>Could not delete picuter</p>",
-    "Msg10": "<p>Image deleted!</p>"
 }
 
 def displayMessage(msgKey):
