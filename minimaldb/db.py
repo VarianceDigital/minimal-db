@@ -38,7 +38,7 @@ def get_db():
             sslmode = 'require' 
         else:
             #LOCAL ACCESS
-            dbname = 'beethovenreview_db'
+            dbname = 'mylocal_db'
             user = 'postgres'
             password = 'postgres'
             host = 'localhost'
