@@ -2,56 +2,44 @@
 
 ## Overview
 
-In this repo you'll find the source code for a small Flask + Boostrap 5 project, where data is managed by an instance of **PostgreSQL** (one of the most popular relational SQL database engines).
+In this repo you'll find the source code for a small Flask + Boostrap 5 project, where data is managed via a **PostgreSQL** database.
 
-The project implements Lifesaver, a demo application for personal reminders of important events about friends and acquaintances (birtdays, wedding anniversaries, meetings, dates and other).
+The project implements Minimal+DB, a demo application featuring a gallery of cat images.
 
-Furthermore, the demo shows a Flask view which returns a JSON string as output.
+Please feel free to play with our demo, or learn more about this project (+ many other interesting things we are currently working on :) ). We will be glad if you clone the repo as a starting point for your future awesome application.
 
-Please feel free to play with our demo, or learn more about this project (+ many other interesting things we are currently working on :) ). We will be glad if you clone the repo as a starting point for any future awesome application.
-
-The main building bloks of Lifesaver do showcase a nice tech stack:
+The main building bloks of Minimald+DB do showcase a nice tech stack:
 - Flask (Python) as the lightwight web server, where the business logic is coded,
 - PostgreSQL as the SQL database engine for the data,
-- Boostrap 5 as the framework for responsive layouts and UI elements,
-- Datatables as a client-side plugin that adds powerful features to HTML tables
+- Boostrap 5 as the framework for responsive layouts and UI elements.
 
-All of the above components are **FREE** and **OPEN SOURCE** (Datatables is fremium, but the free and open source functionalities are more than enough for most purposes).
+All of the above components are **FREE** and **OPEN SOURCE**.
 
-It is quite easy to install Lifesaver on platforms like Azure and Heroku, and make it up and running.
+It is quite easy to install Minimal+DB on platforms like Azure and Heroku, and make it up and running on the Internet.
 
 This project is built "on top" of our **Minimal Project**, please have a look: the repo is here, there is a working demo here, and instructions here. "Minimal" is a good starting point for any Flask project for the following reasons: 
-- sound structure using Python component and Flask Blueprints;
+- sound structure using Python package and Flask Blueprints;
 - well organized web page template with navbar, breadcrumbs, sticky footer;
 - modal popus, alerts, custom error pages;
 - in-site SEO friendly features;
-- last but not least, a full fledged cookie banner (with server side management)
+- last but not least, a full fledged cookie banner (with server side management).
 
-NOTE: for this demo, the cookie banner is disabled. De-comment the relative decorator to re-enable the banner in your project.
     
 ## Requirements and specifications
-- The site make use of the Flask session, in a minimalistic way, to manage the cookie settings and policies
-- IMPORTANT! secrets are supposed to be retrived from config vars. Running the site locally, these values are taken from main.py. To run the site in production, one MUST setup config vars server side. **Do not** send main.py (with git or similar VCS) to the net.
-- Bootstrap 5 does not use JQuery anymore, but JQuery is needed for the Datatablse plugin (yes, latest versions of Datatables allow vanilla Javascript calls, but JQuery is still needed as a dependency).
+- The site make use of the Flask session;
+- IMPORTANT! secrets are supposed to be retrived from config vars. Running the site locally, these values are taken from main.py. To run the site in production, one MUST setup config vars server side.
 
-### Packages needed, which are present in requirements.txt
-All packages needed are listed in the requirements.txt file.
-To install, first activate your venv and then:
+### Packages needed are listed in requirements.txt
+All packages needed to run this app are listed in the requirements.txt file.
+To install, first activate your virutal environment and then launch:
 
 ``pip install -r requirements.txt``
 
-The packages needed are:
-- Flask
-- gunicorn
-- inflection
-
-plus their dependencies.
 
 ## Project structure, page structure
-For explanations see the following articles:
+For further explanations see the following article:
+https://medium.com/@rinaldo.nani/flask-bootstrap-5-starter-web-sites-1f1237a85e83
 
 
 ## Running this site on Azure and Heroku
-Azure and Heroku
-Heroku and Azu
-TEST TEST TEST
+TODO: publish article which explains how.
