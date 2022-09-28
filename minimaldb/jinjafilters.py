@@ -23,7 +23,6 @@ msgDict = {
 }
 
 def displayMessage(msgKey):
-    #THE DECORATOR IS NEEDED TO DISABLE CACHING OF JINJA CALLS!!!
     try:
         result = Markup(msgDict[msgKey])
         return result
