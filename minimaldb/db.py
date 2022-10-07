@@ -38,7 +38,7 @@ def get_db():
             sslmode = 'require' 
         else:
             #LOCAL ACCESS
-            dbname = 'mylocal_db'
+            dbname = 'my_local_db'
             user = 'postgres'
             password = 'postgres'
             host = 'localhost'

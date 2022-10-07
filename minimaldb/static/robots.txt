@@ -4,4 +4,4 @@ Allow: /
 User-agent: ia_archiver
 Disallow: /
 
-Sitemap: https://www.beethovensources.org/sitemap.xml
+Sitemap: https://minimal-db.variancedigital.com/sitemap.xml

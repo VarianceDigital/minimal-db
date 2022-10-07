@@ -10,13 +10,8 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- TOC entry 9 (class 2615 OID 166805)
--- Name: minimaldb; Type: SCHEMA; Schema: -; Owner: -
---
 
 CREATE SCHEMA minimaldb;
-
 
 SET default_tablespace = '';
 
