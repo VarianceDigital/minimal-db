@@ -1,7 +1,4 @@
 User-agent: *
 Allow: /
 
-User-agent: ia_archiver
-Disallow: /
-
 Sitemap: https://minimal-db.variancedigital.com/sitemap.xml
