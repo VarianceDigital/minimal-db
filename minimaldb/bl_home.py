@@ -8,7 +8,7 @@ from .db_photoalbum import *
 bp = Blueprint('bl_home', __name__)
 
 @bp.route('/',methods=('GET', 'POST'))
-@manageCookiePolicy
+@manage_cookie_policy
 def index():
     
     images = db_get_hp_images()
@@ -18,7 +18,7 @@ def index():
 
 
 @bp.route('/about', methods=('GET', 'POST'))
-@manageCookiePolicy
+@manage_cookie_policy
 def about():
 
     mc = set_menu("about")

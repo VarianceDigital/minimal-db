@@ -28,7 +28,7 @@ def pre_operations():
 
 
 #WRAPPER FOR COOKIE SETTINGS 
-def manageCookiePolicy(view):
+def manage_cookie_policy(view):
 
     @functools.wraps(view)
     def wrapped_view(**kwargs):

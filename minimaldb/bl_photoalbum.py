@@ -11,7 +11,7 @@ bp = Blueprint('bl_photoalbum', __name__, url_prefix='/album')
 
 
 @bp.route('/',methods=('GET', 'POST'))
-@manageCookiePolicy
+@manage_cookie_policy
 def list():
     mc = set_menu("list")
 
@@ -21,7 +21,7 @@ def list():
 
 
 @bp.route('/imagedetails/<int:img_id>',methods=('GET', 'POST'))
-@manageCookiePolicy
+@manage_cookie_policy
 def imagedetails(img_id):
     mc = set_menu("imagedetails")
 
