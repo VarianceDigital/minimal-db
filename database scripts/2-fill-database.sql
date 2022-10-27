@@ -13,12 +13,6 @@ SET row_security = off;
 
 CREATE SCHEMA minimaldb;
 
-SET default_tablespace = '';
-
---
--- TOC entry 209 (class 1259 OID 166857)
--- Name: tbl_image; Type: TABLE; Schema: minimaldb; Owner: -
---
 
 CREATE TABLE minimaldb.tbl_image (
     img_id bigint NOT NULL,
@@ -32,10 +26,6 @@ CREATE TABLE minimaldb.tbl_image (
 );
 
 
---
--- TOC entry 210 (class 1259 OID 166867)
--- Name: tbl_image_img_id_seq; Type: SEQUENCE; Schema: minimaldb; Owner: -
---
 
 ALTER TABLE minimaldb.tbl_image ALTER COLUMN img_id ADD GENERATED ALWAYS AS IDENTITY (
     SEQUENCE NAME minimaldb.tbl_image_img_id_seq
@@ -46,12 +36,6 @@ ALTER TABLE minimaldb.tbl_image ALTER COLUMN img_id ADD GENERATED ALWAYS AS IDEN
     CACHE 1
 );
 
-
---
--- TOC entry 3443 (class 0 OID 166857)
--- Dependencies: 209
--- Data for Name: tbl_image; Type: TABLE DATA; Schema: minimaldb; Owner: -
---
 
 INSERT INTO minimaldb.tbl_image OVERRIDING SYSTEM VALUE VALUES (8, 'You are late!', 'We are hungry.', 'kitchen2.jpg', '2022-08-26 11:29:23.832889+02', true, 8, false);
 INSERT INTO minimaldb.tbl_image OVERRIDING SYSTEM VALUE VALUES (1, 'Apple-Cat', 'Tau loves laptops.', 'applecat.jpg', '2022-08-25 14:14:15.421157+02', true, 1, false);
@@ -71,19 +55,8 @@ INSERT INTO minimaldb.tbl_image OVERRIDING SYSTEM VALUE VALUES (18, 'I''m specia
 INSERT INTO minimaldb.tbl_image OVERRIDING SYSTEM VALUE VALUES (7, 'Sous-chef', 'Waiting for the human cook.', 'kitchen1.jpg', '2022-08-26 11:27:15.86196+02', true, 7, false);
 
 
---
--- TOC entry 3450 (class 0 OID 0)
--- Dependencies: 210
--- Name: tbl_image_img_id_seq; Type: SEQUENCE SET; Schema: minimaldb; Owner: -
---
-
 SELECT pg_catalog.setval('minimaldb.tbl_image_img_id_seq', 18, true);
 
-
---
--- TOC entry 3299 (class 2606 OID 167389)
--- Name: tbl_image tbl_image_pkey; Type: CONSTRAINT; Schema: minimaldb; Owner: -
---
 
 ALTER TABLE ONLY minimaldb.tbl_image
     ADD CONSTRAINT tbl_image_pkey PRIMARY KEY (img_id);
