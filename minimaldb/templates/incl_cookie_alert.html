@@ -1,5 +1,4 @@
-<form method="post">
-<div class="modal fade" id="cookieModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+<div class="modal fade" id="cookieModal" tabindex="-1" role="dialog" aria-labelledby="cookieModalLongTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg shadow" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -27,7 +26,7 @@
                     <div data-name="analysis">
                         <div class="form-check mb-1">
                             <input type="checkbox" class="form-check-input" id="checkboxAnalysis" name="checkboxAnalysis"
-                            {%if g.policyCode==1 or g.policyCode==3%}
+                            {%if g.policyCode>1%}
                             checked
                             {%endif%}
                             >
@@ -56,18 +55,74 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button id="btnSaveCookieSettings" name="btnSaveCookieSettings" type="submit" class="btn btn-outline-dark">Save settings</button>
-                <button id="btnAgreeAll" name="btnAgreeAll" type="submit" class="btn btn-secondary">Agree to all</button>
-                <button id="btnAgreeEssential" name="btnAgreeEssential" type="submit" class="btn btn-secondary">Essentials</button>
+                <button id="btnSaveCookieSettings" class="cookiebutton btn btn-outline-dark">Save settings</button>
+                <button id="btnAgreeEssential" class="cookiebutton btn btn-secondary">Agree to essential</button>
+                <button id="btnAgreeAll" class="cookiebutton btn btn-secondary">Agree to all</button>
             </div>
         </div>
     </div>
 </div>
-</form>
+
+<script>
+
+    var myCookieBanner = new bootstrap.Modal(document.getElementById('cookieModal'), 
+                        {backdrop: 'static', keyboard: false});
+
+    var cookieButttonClick = function (event) {
+        
+        var source = event.target || event.srcElement;
+        //IF THE CLICKED ELEMENT IS A BOOTSTRAP ICON GET BUTTON, THE PARENT!
+        if (source.tagName == 'I')
+        {
+          source = source.parentElement;
+        }
+        //SET CHECKBOXES DEPENDING ON BUTTONS
+        const checkboxNecessary = document.getElementById('checkboxNecessary')
+        const checkboxAnalysis = document.getElementById('checkboxAnalysis')
+        if (source.id=='btnAgreeEssential'){
+            checkboxAnalysis.checked = false;
+            checkboxNecessary.checked = true;
+        }
+        if (source.id=='btnAgreeAll'){
+            checkboxAnalysis.checked = true;
+            checkboxNecessary.checked = true;
+        }
+        //PACK DATA TO BE SENT VIA AJAX
+        const params = {
+                btnselected: source.id,
+                checkboxNecessary:document.getElementById('checkboxNecessary').checked,
+                checkboxAnalysis:document.getElementById('checkboxAnalysis').checked,
+        }
+        myCookieBanner.hide();
+        const xhr = new XMLHttpRequest()
+        xhr.open('POST', "{{url_for('auth.ajcookiepolicy')}}")
+        xhr.setRequestHeader('Content-type', 'application/json')
+        xhr.responseType = "json"; //CRUCIAL!
+        xhr.send(JSON.stringify(params)) // Make sure to stringify
+        xhr.onload = function() {
+            if (xhr.readyState == 4 && xhr.status == 204) {
+                //status response from Flask with exact number!
+                console.log(`User preferences saved`);
+            } else {
+                console.log(`Error: ${xhr.status}`);
+            }
+        }
+    }
+    
+    //THIS FUNCTION IS CALLED BY THE FOOTER LINK: IT SHOULD OPEN THE 
+    //COOKIE ALERT MODAL.
+    function open_cookie_alert(){
+	    myCookieBanner.show();
+    }
+
+    const cookiebuttons = document.getElementsByClassName("cookiebutton");
+    Array.from(cookiebuttons).forEach(function (element) {
+        element.addEventListener("click", cookieButttonClick);
+    })
+</script>
+
 {%if g.showCookieAlert==true%}
 <script>
-    var myModal = new bootstrap.Modal(document.getElementById('cookieModal'), 
-                        {backdrop: 'static', keyboard: false});
-    myModal.show();
+    myCookieBanner.show();
 </script>
 {%endif%}

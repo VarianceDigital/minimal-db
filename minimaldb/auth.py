@@ -1,7 +1,7 @@
 import functools
 from flask import current_app
 from flask import (
-    Blueprint, g, redirect, request, session
+    Blueprint, g, redirect, request, session, Response
 )
 import os
 
@@ -24,7 +24,13 @@ def pre_operations():
             return redirect(url, code=code)
 
 
-    g.policyCode = 0 #SET DEFAULT INDEPENDENTLY TO WRAPPER
+    g.policyCode = -1 #SET DEFAULT INDEPENDENTLY TO WRAPPER
+    policyCode = session.get("cookie-policy")
+    #possible values Null -> no info, 0 -> Strict, 1 -> Minimal, 
+    #                                 2 -> Analisys, 3 -> All
+    if policyCode !=None:
+        g.policyCode = policyCode
+
 
 
 #WRAPPER FOR COOKIE SETTINGS 
@@ -33,31 +39,34 @@ def manage_cookie_policy(view):
     @functools.wraps(view)
     def wrapped_view(**kwargs):
 
-        if request.method == 'POST':
-            if 'btnAgreeAll' in request.form:
-                session['cookie-policy'] = 3
-            elif 'btnAgreeEssential' in request.form:
-                session['cookie-policy'] = 0
-            elif 'btnSaveCookieSettings' in request.form:
-                session['cookie-policy'] = 0 #default
-                if 'checkboxAnalysis' in request.form:
-                    session['cookie-policy'] = 1
-                if 'checkboxPersonalization' in request.form:
-                    session['cookie-policy'] = 2
-                if 'checkboxPersonalization' in request.form and 'checkboxAnalysis' in request.form:
-                    session['cookie-policy'] = 3
-
-        policyCode = session.get("cookie-policy")
-        #possible values Null -> no info, 0 -> minimal, 1 -> Analysis, 
-        #                                 2 -> Personalization, 3 -> All
-        g.policyCode = 0
-        if policyCode !=None:
-            g.policyCode = policyCode
-
         g.showCookieAlert = False #DEFAULT
-        if policyCode == None:
+        if g.policyCode == -1:
             g.showCookieAlert = True
 
         return view(**kwargs)
 
     return wrapped_view
+
+@bp.route('/ajcookiepolicy/',methods=('GET', 'POST'))
+def ajcookiepolicy():
+    #DECIDE COOKIE PREFERENCE STRATEGY
+    if request.method == 'POST':
+        data = request.json
+        btn_name = data['btnselected']
+        checkbox_analysis = data['checkboxAnalysis']
+        checkbox_necessary = data['checkboxNecessary']
+        if btn_name == 'btnAgreeAll':
+            session['cookie-policy'] = 3
+        elif btn_name == 'btnAgreeEssential':
+            session['cookie-policy'] = 1
+        elif btn_name == 'btnSaveCookieSettings':
+            session['cookie-policy'] = 0 #default
+            if checkbox_necessary and not checkbox_analysis:
+                session['cookie-policy'] = 1
+            elif checkbox_analysis and not checkbox_necessary:
+                #never happends if main checkbox disabled!
+                session['cookie-policy'] = 2
+            elif checkbox_necessary and checkbox_analysis:
+                session['cookie-policy'] = 3
+
+    return Response(status=204)
