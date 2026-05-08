@@ -1,5 +1,5 @@
 from inflection import parameterize
-from flask import Markup
+from markupsafe import Markup
 
 def slugify(myvar):
     return parameterize(myvar)[:80].rstrip('-')
